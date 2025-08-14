@@ -2,6 +2,11 @@
 
 A beautiful, customizable toast notification system that can be easily integrated into any website.
 
+## 📚 Test Website
+```html
+https://akalankakaushalya.github.io/Advanced-Toast/
+```
+
 ## 🚀 Quick Start
 
 ### 1. Include CDN Files
@@ -10,10 +15,10 @@ Add these CDN links to your HTML:
 
 ```html
 <!-- CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yourusername/advanced-toast@latest/advanced-toast.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AkalankaKaushalya/Advanced-Toast@main/advanced-toast.min.css">
 
 <!-- JavaScript -->
-<script src="https://cdn.jsdelivr.net/gh/yourusername/advanced-toast@latest/advanced-toast.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/AkalankaKaushalya/Advanced-Toast@main/advanced-toast.min.js"></script>
 ```
 
 ### 2. Initialize Toast Container
