@@ -328,5 +328,3 @@ MIT License - Feel free to use in commercial and personal projects.
 Found a bug or want to contribute? Please create an issue or pull request on GitHub.
 
 ---
-
-**Note**: Replace `AkalankaKaushalya` in the CDN links with your actual GitHub username when hosting the files.
