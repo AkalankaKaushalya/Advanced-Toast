@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Toast</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="advanced-toast.min.css">
+    <style>
+        body {
+            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .button-container {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 75%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .section-title {
+            background: linear-gradient(45deg, #020511, #0011ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .btn-modern {
+            position: relative;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(0);
+        }
+
+        .btn-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-modern:active {
+            transform: translateY(0);
+        }
+
+        .btn-modern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-modern:hover::before {
+            left: 100%;
+        }
+
+        .btn-success-modern {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-error-modern {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-warning-modern {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-info-modern {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-custom-modern {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-special-modern {
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            color: white;
+            border: 1px solid rgba(236, 72, 153, 0.3);
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .button-section {
+            margin-bottom: 3rem;
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="toast-container" id="toastContainer"></div>
+
+    <div class="button-container">
+        <div class="button-section">
+            <h1 class="section-title">Normal Toast Messages</h1>
+            <div class="button-grid">
+                <button class="btn-modern btn-success-modern"
+                        onclick="showNormalToast('success', 'Success', 'Operation completed successfully!')">
+                    <span class="icon">✓</span>Success
+                </button>
+                <button class="btn-modern btn-error-modern"
+                        onclick="showNormalToast('error', 'Error', 'Something went wrong!')">
+                    <span class="icon">✕</span>Error
+                </button>
+                <button class="btn-modern btn-warning-modern"
+                        onclick="showNormalToast('warning', 'Warning', 'This is a warning message')">
+                    <span class="icon">⚠</span>Warning
+                </button>
+                <button class="btn-modern btn-info-modern"
+                        onclick="showNormalToast('info', 'Info', 'This is an info message')">
+                    <span class="icon">ℹ</span>Info
+                </button>
+            </div>
+        </div>
+
+        <div class="button-section">
+            <h1 class="section-title">Custom Toast Options</h1>
+            <div class="button-grid">
+                <button class="btn-modern btn-success-modern glow-effect"
+                        onclick="showWithSound('success', 'Success', 'Operation completed successfully!', true)">
+                    <span class="icon">🔊</span>With Sound
+                </button>
+                <button class="btn-modern btn-error-modern"
+                        onclick="showWithOutSound('error', 'Error', 'Something went wrong!', false)">
+                    <span class="icon">🔇</span>Without Sound
+                </button>
+                <button class="btn-modern btn-warning-modern"
+                        onclick="showOffProgress('warning', 'Warning', 'This is a warning message', false)">
+                    <span class="icon">⏸</span>No Progress Bar
+                </button>
+                <button class="btn-modern btn-custom-modern pulse"
+                        onclick="showCustomColor('custom', 'Custom Toast', 'This is Custom Toast', '#e926ff', '#fae3fc')">
+                    <span class="icon">🎨</span>Custom Colors
+                </button>
+                <button class="btn-modern btn-special-modern"
+                        onclick="showCustomToastAddButtons('custom', 'Custom Toast', 'This is Custom Toast With Custom Button')">
+                    <span class="icon">⚡</span>Custom Buttons
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="advanced-toast.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        function showNormalToast(type, title, message) {
+            Toast.fire({
+                type: type,
+                title: title,
+                message: message
+            });
+        }
+
+        function showWithSound(type, title, message, sound) {
+            Toast.fire({
+                type: type,
+                title: title,
+                message: message,
+                sound: sound
+            });
+        }
+
+        function showWithOutSound(type, title, message, sound) {
+            Toast.fire({
+                type: type,
+                title: title,
+                message: message,
+                sound: sound
+            });
+        }
+
+        function showOffProgress(type, title, message, progressBar) {
+            Toast.fire({
+                type: type,
+                title: title,
+                message: message,
+                progressBar: progressBar
+            });
+        }
+
+        function showCustomColor(type, title, message, customColor, customBgColor) {
+            Toast.fire({
+                type: type,
+                title: title,
+                message: message,
+                customColor: customColor,
+                customBgColor: customBgColor,
+            });
+        }
+
+        function showCustomToastAddButtons(type, title, message) {
+            Toast.fire({
+                type: type,
+                title: title,
+                message: message,
+                actions: [
+                    {
+                        text: 'Cancel',
+                        onClick: () => {
+                            Toast.fire({
+                                type: 'error',
+                                title: 'Error',
+                                message: 'Operation cancelled'
+                            });
+                        }
+                    },
+                    {
+                        text: 'Confirm',
+                        onClick: () => {
+                            Toast.fire({
+                                type: 'success',
+                                title: 'Success',
+                                message: 'Operation completed successfully'
+                            });
+                        }
+                    }
+                ]
+            });
+        }
+    </script>
+</body>
+</html>
