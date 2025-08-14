@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://akalankakaushalya.github.io/Advanced-Toast/sitemap.xml
